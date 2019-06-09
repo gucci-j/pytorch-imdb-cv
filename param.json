@@ -1,0 +1,12 @@
+{
+    "batch_size": 32,
+    "embedding_dim": 300,
+    "hidden_dim": 512,
+    "output_dim": 1,
+    "num_layers": 3,
+    "dropout": 0.4,
+    "epochs": 3,
+    "gpu": true,
+    "gpu_number": 2,
+    "num_folds": 3
+}
