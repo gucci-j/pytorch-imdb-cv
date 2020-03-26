@@ -2,9 +2,9 @@ from pathlib import Path
 import json
 import sys
 
-from src.model import Model
-from src.load_data import load_data
-from src.metrics import binary_accuracy
+from src import Model
+from src import load_data
+from src import binary_accuracy
 
 import torch
 import torch.nn as nn
@@ -61,10 +61,10 @@ def main():
 
         TEXT.build_vocab(train_data, max_size=25000, vectors="glove.6B.300d")
         logger.info(f'Embedding size: {TEXT.vocab.vectors.size()}.')
-        LABEL.build_vocab(train_data)
+        LABEL.build_vocab(train_data) # For converting str into float labels.
 
         model = Model(len(TEXT.vocab), args['embedding_dim'], args['hidden_dim'],
-            args['output_dim'], args['num_layers'], args['dropout'])
+            args['output_dim'], args['num_layers'], args['dropout'], TEXT.vocab.vectors, args["embedding_trainable"])
         
         optimizer = optim.Adam(model.parameters())
         criterion = nn.BCEWithLogitsLoss()

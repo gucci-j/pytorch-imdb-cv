@@ -5,8 +5,9 @@
     "output_dim": 1,
     "num_layers": 3,
     "dropout": 0.4,
-    "epochs": 3,
+    "epochs": 1,
     "gpu": true,
     "gpu_number": 2,
-    "num_folds": 3
+    "num_folds": 3,
+    "embedding_trainable": true
 }

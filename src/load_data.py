@@ -27,7 +27,7 @@ class load_data(object):
         LABEL = data.LabelField(dtype=torch.float)
         fields = [('text', TEXT), ('label', LABEL)]
         
-        kf = KFold(n_splits=num_folds, random_state=self.SEED)
+        kf = KFold(n_splits=num_folds, shuffle=True, random_state=self.SEED)
         train_data_arr = np.array(self.train_data.examples)
 
         for train_index, val_index in kf.split(train_data_arr):

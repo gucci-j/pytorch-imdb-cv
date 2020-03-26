@@ -29,9 +29,15 @@ class Self_Attention(nn.Module):
 
 
 class Model(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, num_layers, d_rate):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, num_layers, d_rate,
+                embedding_weights=None, embedding_trainable=True):
         super(Model, self).__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        if embedding_weights is not None:
+            self.embedding.weight.data.copy_(embedding_weights)
+        if embedding_trainable is False:
+            self.embedding.weight.requires_grad = False
+
         self.gru = nn.GRU(embedding_dim, hidden_dim, num_layers=num_layers, 
                         bidirectional=True, dropout=d_rate)
         self.dense = nn.Linear(2 * hidden_dim, output_dim)
